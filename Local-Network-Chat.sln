@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Local-Network-Chat", "Local-Network-Chat.csproj", "{A60A58E7-AA2B-43E0-8348-4F0511CB2447}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A60A58E7-AA2B-43E0-8348-4F0511CB2447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A60A58E7-AA2B-43E0-8348-4F0511CB2447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A60A58E7-AA2B-43E0-8348-4F0511CB2447}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A60A58E7-AA2B-43E0-8348-4F0511CB2447}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B98A77B9-B768-4B01-87FA-B963D3F43E14}
+	EndGlobalSection
+EndGlobal
