@@ -19,6 +19,9 @@ namespace Local_Network_Chat
         private Socket socket;
         private EndPoint epLocal, epRemote;
 
+        private string hostNickname;
+
+
         public FrmMain()
         {
             InitializeComponent();
@@ -58,9 +61,15 @@ namespace Local_Network_Chat
                 socket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
 
                 BtnConnect.Enabled = false;
-                BtnDisconect.Enabled = true;
                 BtnSendMessage.Enabled = true;
 
+                TxtNicknameHost.Enabled = false;
+                TxtIpClient.Enabled = false;
+                TxtIpHost.Enabled = false;
+                TxtPortClient.Enabled = false;
+                TxtPortHost.Enabled = false;
+
+                hostNickname = TxtNicknameHost.Text ?? "Anonimus";
 
                 this.Text = $"Connected to {TxtIpClient.Text}:{TxtPortClient.Text}";
                 
@@ -71,16 +80,6 @@ namespace Local_Network_Chat
             }
         }
 
-        private void BtnDisconect_Click(object sender, EventArgs e)
-        {
-            socket.Close();
-
-            BtnConnect.Enabled = true;
-            BtnDisconect.Enabled = false;
-            BtnSendMessage.Enabled = false;
-
-            this.Text = "Local Network Chat";
-        }
 
         private void BtnSendMessage_Click(object sender, EventArgs e)
         {
@@ -89,11 +88,11 @@ namespace Local_Network_Chat
                 ASCIIEncoding encoding = new ASCIIEncoding();
                 byte[] msg = new byte[1024];
 
-                msg = encoding.GetBytes(TxtMessage.Text);
+                msg = encoding.GetBytes($"[{hostNickname}] " + TxtMessage.Text);
 
                 socket.Send(msg);
 
-                LbxChat.Items.Add("[You] " + TxtMessage.Text);
+                LbxChat.Items.Add($"[{hostNickname}] " + TxtMessage.Text);
                 TxtMessage.Clear();
             }
             catch (Exception ex)
@@ -112,12 +111,13 @@ namespace Local_Network_Chat
                 {
                     byte[] receivedData = new byte[1024];
 
+                    ASCIIEncoding encoding = new ASCIIEncoding();
+
                     receivedData = (byte[])aResult.AsyncState;
 
-                    ASCIIEncoding encoding = new ASCIIEncoding();
-                    string recievedMessage = encoding.GetString(receivedData);
+                    string receivedMessage = encoding.GetString(receivedData);
 
-                    LbxChat.Items.Add("[Friend] " + recievedMessage);
+                    LbxChat.Items.Add(receivedMessage);
                 }
 
                 byte[] buffer = new byte[1024];
