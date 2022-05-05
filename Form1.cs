@@ -69,7 +69,10 @@ namespace Local_Network_Chat
                 TxtPortClient.Enabled = false;
                 TxtPortHost.Enabled = false;
 
-                hostNickname = TxtNicknameHost.Text ?? "Anonimus";
+                if (!string.IsNullOrEmpty(TxtNicknameHost.Text))
+                    hostNickname = TxtNicknameHost.Text;
+                else
+                    hostNickname = "Anonimus";
 
                 this.Text = $"Connected to {TxtIpClient.Text}:{TxtPortClient.Text}";
                 
